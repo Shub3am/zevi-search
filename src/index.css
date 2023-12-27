@@ -6,3 +6,10 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.box {
+  background: url("./background.jpg");
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+}

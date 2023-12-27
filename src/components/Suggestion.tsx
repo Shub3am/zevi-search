@@ -21,11 +21,11 @@ export default function SuggestionBox() {
         
     let LatestTrends = data.products.map((item: {id: number, title: string, images: Array<string>}, index) => {
         if (index < 5) {
-        return <div className="m-auto sm:m-0" key={item.id}><img className="rounded-lg" style={{ width: "200px", height: "150px" }} alt={item.title} src={item.images[0]}/> <p className="my-2 text-xs font-light">{item.title}</p></div> }
+        return <div className="m-auto sm:m-0" key={item.id}><a href="/shop"><img className="rounded-lg" style={{ width: "200px", height: "150px" }} alt={item.title} src={item.images[0]}/> <p className="my-2 text-xs font-light">{item.title}</p></a></div> }
     })
     let productSuggestions = data.products.map((item: {title: string},index) => {
         if (index >= 5 && index <= 10 ) {
-        return <p key={index} className="py-1 text-sm">{item.title}</p> }
+        return <a href="/shop"><p key={index} className="py-1 text-sm">{item.title}</p></a> }
     })
 
     return <div className="bg-white w-8/12 m-auto rounded-lg capitalize py-4">
