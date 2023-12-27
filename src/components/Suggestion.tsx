@@ -33,6 +33,6 @@ export default function SuggestionBox() {
         <div><h4 className="py-4">Latest Trends</h4><div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 "> {LatestTrends}</div></div></div>
         <div className="mx-10"><h4 className="py-4 text-lg">Popular Suggestions</h4>{productSuggestions}</div>
     </div> } else {
-        return <h1>ok</h1>
+        return <h1>No Suggestions</h1>
     }
 }
