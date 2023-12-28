@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState} from "react"
 import SuggestionBox from "./components/Suggestion"
 import Header from "./components/Header"
 export default function App() {
