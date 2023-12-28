@@ -49,8 +49,8 @@ export default function Shop() {
     const [priceRangeToggle, setPriceToggle] = useState(true)
     const [ratingToggle, setRatingToggle] = useState(true)
     return <div className=""><Header/>
-    <div className="grid grid-cols-2">
-        <div className=""><h2>Search Results</h2> <div><button className="flex items-center uppercase" onClick={()=>setBrandsToggle(!brandsToggle)}>Brand 
+    <div className="flex my-5 justify-center">
+        <div className="w-1/3"><h2 className="text-4xl font-light mb-5">Search Results</h2> <div><button className="flex items-center uppercase" onClick={()=>setBrandsToggle(!brandsToggle)}>Brand 
     {ArrowIcon}   </button> {brandsToggle ? <div className="transition  animated ease-in-out delay-300"><div>  <input type="checkbox" id="H&M" name="H&M" value="H&M"/>
   <label htmlFor="H&M"> H&M</label></div></div>: null}</div>
   
@@ -71,7 +71,7 @@ export default function Shop() {
   
   </div>
   
-  <div className=""><ProductsShowcase products={products}/></div>
+  <div className="w-2/3"><ProductsShowcase products={products}/></div>
  
   
   </div>
