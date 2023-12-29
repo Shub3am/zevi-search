@@ -14,9 +14,21 @@ type ProductsType = {
 
 let ArrowIcon = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="mx-2 bi bi-chevron-down" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> </svg>
 
-
+function addToWishlist(item: {id: number, product: string}) {
+  let id = item.id
+  if (localStorage.getItem("wishList")) {
+    console.log(localStorage['wishList'])
+    let wishList = JSON.parse(localStorage.getItem('wishList'))
+    wishList[id] = item.product
+    localStorage.setItem('wishList', JSON.stringify(wishList))
+  } else { 
+    let wishList = {id: item.product}
+    localStorage.setItem('wishList', JSON.stringify(wishList))
+  }
+}
 
 export default function Shop() {
+
 
   //this parses the query from url
   const { search } = useLocation();
@@ -71,7 +83,7 @@ export default function Shop() {
   
   </div>
   
-  <div className="w-2/3"><ProductsShowcase products={products}/></div>
+  <div className="w-2/3"><ProductsShowcase products={products} addToWishlist={addToWishlist}/></div>
  
   
   </div>
