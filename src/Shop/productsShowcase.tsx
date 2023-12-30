@@ -2,10 +2,10 @@
 import styled from 'styled-components'
 
 
-export default function productsShowcase({products, addToWishlist}: any) {
+export default function productsShowcase({products, addToWishlist, priceFilter}: any) {
 if (products.products.length) {
     
-    let productsGrid = products.products.map((item: any)  => { if (item.images[1]) {
+    let productsGrid = products.products.map((item: any)  => { if (item.images[1] && priceFilter && item.price < priceFilter) {
         return (<div className="mb-4">
             <div className='group relative'>
                 <img alt="wishlist-button" className='hidden group-hover:block absolute top-5 right-10' onClick={()=> { addToWishlist({id: item.id, product: item.title})}} src={process.env.PUBLIC_URL + '/wishlist-default.png'} width={20}/>
