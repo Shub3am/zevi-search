@@ -27,22 +27,27 @@ function addToWishlist(item: {id: number, product: string}) {
   }
 }
 
-function SortByRating({ratingToggle, setRatingToggle}: {ratingToggle: boolean, setRatingToggle: Function}) {
+function SortByRating({ratingToggle, setRatingToggle, ratingFilter, setRatingFilter}: {ratingToggle: boolean, setRatingToggle: Function, ratingFilter: number, setRatingFilter: Function}) {
   return <div><button className="uppercase flex items-center" onClick={()=>setRatingToggle(!ratingToggle)}>Rating 
   {ArrowIcon}   </button> {ratingToggle ? <div className="transition  animated ease-in-out delay-300">
-    <div className="flex">  <input type="checkbox" className="mx-1" id="rating-1" name="rating-1" value="1"/>
-<label htmlFor="rating-1" className="flex"><Rating selected={5}/></label></div><div className="flex">  <input type="checkbox" className="mx-1" id="rating-2" name="rating-2" value="2"/>
-<label htmlFor="H&M" className="flex"><Rating selected={4}/></label></div><div className="flex">  <input type="checkbox" className="mx-1" id="H&M" name="H&M" value="H&M"/>
-<label htmlFor="H&M" className="flex"><Rating selected={3}/></label></div><div className="flex">  <input type="checkbox" className="mx-1" id="H&M" name="H&M" value="H&M"/>
-<label htmlFor="H&M" className="flex"><Rating selected={2}/></label></div><div className="flex">  <input type="checkbox" className="mx-1" id="H&M" name="H&M" value="H&M"/>
-<label htmlFor="H&M" className="flex"><Rating selected={1}/></label></div></div>: null}</div>
+    <div className="flex">  
+    <input type="checkbox" className="mx-1" onClick={()=> (ratingFilter !== 5 ? setRatingFilter(5) : setRatingFilter(0))} checked={ratingFilter === 5 ? true:false}/>
+    <label className="flex"><Rating selected={5}/></label></div>
+    <div className="flex">  
+<input type="checkbox" className="mx-1" onClick={()=> (ratingFilter !== 4 ? setRatingFilter(4) : setRatingFilter(0))} checked={ratingFilter === 4 ? true:false}/>
+<label className="flex"><Rating selected={4}/></label></div>
+<div className="flex">  <input type="checkbox" className="mx-1" onClick={()=> (ratingFilter !== 3 ? setRatingFilter(3) : setRatingFilter(0))} checked={ratingFilter === 3 ? true:false}/>
+<label className="flex"><Rating selected={3}/></label></div>
+<div className="flex">  <input type="checkbox" className="mx-1" onClick={()=> (ratingFilter !== 2 ? setRatingFilter(2) : setRatingFilter(0))} checked={ratingFilter === 2 ? true:false}/>
+<label className="flex"><Rating selected={2}/></label></div><div className="flex">  <input type="checkbox" className="mx-1" onClick={()=> (ratingFilter !== 1 ? setRatingFilter(1) : setRatingFilter(0))} checked={ratingFilter === 1 ? true:false}/>
+<label className="flex"><Rating selected={1}/></label></div></div>: null}</div>
 }
 
 
 function SortByPrice({priceRangeToggle, setPriceToggle, priceFilter, setPriceFilter}: {priceRangeToggle: boolean, setPriceToggle: Function, priceFilter:number, setPriceFilter: Function}) {
   return (<div><button className="flex items-center uppercase" onClick={()=>setPriceToggle(!priceRangeToggle)}>Price Range 
-    {ArrowIcon}   </button> {priceRangeToggle ? <div className="transition  animated ease-in-out delay-300"><div className="flex flex-col">  <div><input type="checkbox" onClick={()=> setPriceFilter(500)} id="price" checked={priceFilter === 500 ? true:false} name="price" value="price"/>
-  <label htmlFor="price"> Under 500</label></div><div><input type="checkbox" onClick={()=> setPriceFilter(1000)} id="price" checked={priceFilter === 1000 ? true:false} name="price" value="price"/>
+    {ArrowIcon}   </button> {priceRangeToggle ? <div className="transition  animated ease-in-out delay-300"><div className="flex flex-col">  <div><input type="checkbox" onClick={()=> (priceFilter !== 500 ? setPriceFilter(500) : setPriceFilter(999999))} id="price" checked={priceFilter === 500 ? true:false} name="price" value="price"/>
+  <label htmlFor="price"> Under 500</label></div><div><input type="checkbox" onClick={()=> (priceFilter !== 1000 ? setPriceFilter(1000) : setPriceFilter(999999))} id="price" checked={priceFilter === 1000 ? true:false} name="price" value="price"/>
   <label htmlFor="price"> Under 1000</label></div></div></div>: null}</div>)
 
 }
@@ -81,10 +86,10 @@ export default function Shop() {
     const [priceRangeToggle, setPriceToggle] = useState(true)
     const [ratingToggle, setRatingToggle] = useState(true)
 
-    const [priceFilter, setPriceFilter] = useState() //example: [500, 100] : Under 500 and under 100
+    const [priceFilter, setPriceFilter] = useState(999999) //example: [500, 100] : Under 500 and under 100
     const [brandFilter, setBrandFilter] = useState([])
-    const [ratingFilter, setRatingFilter] = useState([])
-    
+    const [ratingFilter, setRatingFilter] = useState(0)
+
     return <div className="">
         
       <Header />
@@ -96,14 +101,14 @@ export default function Shop() {
   
   <SortByPrice priceRangeToggle={priceRangeToggle} setPriceToggle={setPriceToggle} priceFilter={priceFilter} setPriceFilter={setPriceFilter}/>
   
-  <SortByRating ratingToggle={ratingToggle} setRatingToggle={setRatingToggle}/>
+  <SortByRating ratingToggle={ratingToggle} setRatingToggle={setRatingToggle} ratingFilter={ratingFilter} setRatingFilter={setRatingFilter}/>
   
   
   
   
   </div>
   
-  <div className="w-2/3"><ProductsShowcase products={products} priceFilter={priceFilter} addToWishlist={addToWishlist}/></div>
+  <div className="w-2/3"><ProductsShowcase products={products} priceFilter={priceFilter} ratingFilter={ratingFilter} addToWishlist={addToWishlist}/></div>
  
   
   </div>
